@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Tier-2
+  - Tier-1
+  - Tier0
+  - Tier1
+  - Tier2
+  - Tier3
+  - BigSizePlatform
+  - SmallSizePlatform
+  - MidSizePlatform
+  - tier-3
+  - tier-4
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - tier3
+  - tier2
+  - tier1
+  - tier0
+  - tier-1
+  - tier-2
+  - tier-3
+  - tier-4
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: tier3Tree
+    uniqueID: 1012055927
+    locked: 0
+  - name: tier3
+    uniqueID: 2245490645
+    locked: 0
+  - name: tier2Tree
+    uniqueID: 2652808547
+    locked: 0
+  - name: tier2
+    uniqueID: 1812274377
+    locked: 0
+  - name: tier1
+    uniqueID: 1553130013
+    locked: 0
+  - name: tier0
+    uniqueID: 220924377
+    locked: 0
+  - name: tier0Obstacles
+    uniqueID: 2882110471
+    locked: 0
+  - name: tier-1
+    uniqueID: 590420367
+    locked: 0
+  - name: tier-2
+    uniqueID: 1811787569
+    locked: 0
+  - name: tier-2Tree
+    uniqueID: 3347666951
+    locked: 0
+  - name: tier-3
+    uniqueID: 3092061681
+    locked: 0
+  - name: tier-3Tree
+    uniqueID: 3077145763
+    locked: 0
+  - name: tier-4
+    uniqueID: 632258491
+    locked: 0
+  - name: DeadCharacter
+    uniqueID: 2276808689
+    locked: 0
+  - name: LeftObstacles
+    uniqueID: 3143109519
+    locked: 0
+  - name: CharacterLeft
+    uniqueID: 1603830783
+    locked: 0
+  - name: RightObstacles
+    uniqueID: 2063964905
+    locked: 0
+  - name: CharacterRight
+    uniqueID: 122600597
+    locked: 0
+  - name: Explosion
+    uniqueID: 1265469959
+    locked: 0
+  - name: UI
+    uniqueID: 1676641769
+    locked: 0
+  - name: EdgeofProgressiveBar
+    uniqueID: 2992342455
+    locked: 0
+  - name: 
+    uniqueID: 3385540197
+    locked: 0
