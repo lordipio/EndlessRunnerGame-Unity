@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1216918041961282104}
   - component: {fileID: 1216918041961282105}
-  - component: {fileID: 3569016647559502207}
+  - component: {fileID: -4550017185262249262}
   m_Layer: 0
   m_Name: RoadPlatform
   m_TagString: Tier0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 220924377
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b48a95c8c9759094391210f86a8d4656, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3569016647559502207
+--- !u!114 &-4550017185262249262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1216918041961282110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7fd345859f2f9d4193f1560b17c4d26, type: 3}
+  m_Script: {fileID: 11500000, guid: e9f0e17c56126814e9c74186faf51a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileOffset: {x: 0.815, y: 0}
+  spriteRenderer: {fileID: 1216918041961282105}

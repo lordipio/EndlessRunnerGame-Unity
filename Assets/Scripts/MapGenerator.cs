@@ -21,6 +21,29 @@ public class MapGenerator : MonoBehaviour
     [Space]
     [Space]
 
+    //[SerializeField]
+    //TileInfo roadPrefabTileInfo;
+
+    //[SerializeField]
+    //TileInfo tier_4TileInfo;
+
+    //[SerializeField]
+    //TileInfo tier_3TileInfo;
+
+    //[SerializeField]
+    //TileInfo tier_2TileInfo;
+
+    //[SerializeField]
+    //TileInfo tier_1TileInfo;
+
+    //[SerializeField]
+    //TileInfo tier1TileInfo;
+
+    //[SerializeField]
+    //TileInfo tier2TileInfo;
+
+    //[SerializeField]
+    //TileInfo tier3TileInfo;
 
     [SerializeField]
     GameObject roadPrefab;
@@ -51,6 +74,9 @@ public class MapGenerator : MonoBehaviour
 
     [SerializeField]
     List<GameObject> ObstaclesPrefab;
+
+    [SerializeField]
+    GameObject loadingScreen;
     #endregion
 
     #region Queue 
@@ -208,7 +234,7 @@ public class MapGenerator : MonoBehaviour
     }
     #endregion
 
-
+    bool isMapLoaded = false;
 
     void Awake()
     {
@@ -220,9 +246,12 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        loadingScreen = Instantiate<GameObject>(loadingScreen);
+
         CreateTiles();
-        StartCoroutine(MoveCamera());
+        //StartCoroutine(CreateTiles());
         StartCoroutine(ObstaclesSpawner());
+        StartCoroutine(MoveCamera());
     }
 
     void CreateSingleton()
@@ -312,11 +341,12 @@ public class MapGenerator : MonoBehaviour
 
     void CreateTiles()
     {
-
         for (int i = 0; i < platformNumbers; i++)
         {
             if (i <= platformNumbers / 2) // Size of bigSizePlatform is 3 times bigger than smaller one
             {
+                //roadPrefabTileInfo = Instantiate<TileInfo>(roadPrefabTileInfo, tier2SpawnPoint + tier2PlatformTotalOffset, tier2Prefab[0].transform.rotation);
+
                 lastTileTier2 = Instantiate<GameObject>(tier2Prefab[0], tier2SpawnPoint + tier2PlatformTotalOffset, tier2Prefab[0].transform.rotation);
                 lastTileTier_1 = Instantiate<GameObject>(tier_1Prefab[0], tier_1SpawnPoint + tier_1PlatformTotalOffset, tier_1Prefab[0].transform.rotation);
                 lastTileTier1 = Instantiate<GameObject>(tier1Prefab[0], tier1SpawnPoint + tier1PlatformTotalOffset, tier1Prefab[0].transform.rotation);
@@ -330,7 +360,6 @@ public class MapGenerator : MonoBehaviour
                 lastTileTier3.GetComponent<SpriteRenderer>().sortingOrder = bigSizePlatformSortingOrder;
                 lastTileTier_3.GetComponent<SpriteRenderer>().sortingOrder = bigSizePlatformSortingOrder;
                 lastTileTier_4.GetComponent<SpriteRenderer>().sortingOrder = bigSizePlatformSortingOrder;
-
                 lastTileTier_2.GetComponent<SpriteRenderer>().sortingOrder = bigSizePlatformSortingOrder;
                 lastTileTier2.GetComponent<SpriteRenderer>().sortingOrder = bigSizePlatformSortingOrder;
 
@@ -360,9 +389,68 @@ public class MapGenerator : MonoBehaviour
 
             smallSizePlatformSortingOrder++;
             midSizePlatformSortingOrder++;
+            Destroy(loadingScreen);
         }
     }
 
+    //IEnumerator CreateTiles()
+    //{
+
+    //    for (int i = 0; i < platformNumbers; i++)
+    //    {
+    //        yield return null;
+    //        if (i <= platformNumbers / 2) // Size of bigSizePlatform is 3 times bigger than smaller one
+    //        {
+
+
+    //            lastTileTier2 = Instantiate<GameObject>(tier2Prefab[0], tier2SpawnPoint + tier2PlatformTotalOffset, tier2Prefab[0].transform.rotation);
+    //            lastTileTier_1 = Instantiate<GameObject>(tier_1Prefab[0], tier_1SpawnPoint + tier_1PlatformTotalOffset, tier_1Prefab[0].transform.rotation);
+    //            lastTileTier1 = Instantiate<GameObject>(tier1Prefab[0], tier1SpawnPoint + tier1PlatformTotalOffset, tier1Prefab[0].transform.rotation);
+    //            lastTileTier3 = Instantiate<GameObject>(tier3Prefab[0], tier3SpawnPoint + tier3PlatformTotalOffset, tier3Prefab[0].transform.rotation);
+    //            lastTileTier_3 = Instantiate<GameObject>(tier_3Prefab[0], tier_3SpawnPoint + tier_3PlatformTotalOffset, tier_3Prefab[0].transform.rotation);
+    //            lastTileTier_4 = Instantiate<GameObject>(tier_4Prefab[0], tier_4SpawnPoint + tier_4PlatformTotalOffset, tier_4Prefab[0].transform.rotation);
+    //            lastTileTier_2 = Instantiate<GameObject>(tier_2Prefab[0], tier_2SpawnPoint + tier_2PlatformTotalOffset, tier_2Prefab[0].transform.rotation);
+
+    //            lastTileTier_1.GetComponent<SpriteRenderer>().sortingOrder = bigSizePlatformSortingOrder;
+    //            lastTileTier1.GetComponent<SpriteRenderer>().sortingOrder = bigSizePlatformSortingOrder;
+    //            lastTileTier3.GetComponent<SpriteRenderer>().sortingOrder = bigSizePlatformSortingOrder;
+    //            lastTileTier_3.GetComponent<SpriteRenderer>().sortingOrder = bigSizePlatformSortingOrder;
+    //            lastTileTier_4.GetComponent<SpriteRenderer>().sortingOrder = bigSizePlatformSortingOrder;
+
+    //            lastTileTier_2.GetComponent<SpriteRenderer>().sortingOrder = bigSizePlatformSortingOrder;
+    //            lastTileTier2.GetComponent<SpriteRenderer>().sortingOrder = bigSizePlatformSortingOrder;
+
+    //            tier_4Queue.Enqueue(lastTileTier_4);
+    //            tier_3Queue.Enqueue(lastTileTier_3);
+    //            tier_2Queue.Enqueue(lastTileTier_2);
+    //            tier_1Queue.Enqueue(lastTileTier_1);
+    //            tier1Queue.Enqueue(lastTileTier1);
+    //            tier2Queue.Enqueue(lastTileTier2);
+    //            tier3Queue.Enqueue(lastTileTier3);
+
+    //            tier_1PlatformTotalOffset += smallSizePlatformOffset;
+    //            tier1PlatformTotalOffset += smallSizePlatformOffset;
+    //            tier_4PlatformTotalOffset += bigSizePlatformOffset;
+    //            tier_3PlatformTotalOffset += bigSizePlatformOffset;
+    //            tier_2PlatformTotalOffset += bigSizePlatformOffset;
+    //            tier2PlatformTotalOffset += bigSizePlatformOffset;
+    //            tier3PlatformTotalOffset += bigSizePlatformOffset;
+
+    //            bigSizePlatformSortingOrder++;
+    //        }
+
+    //        lastTileTier0 = Instantiate<GameObject>(roadPrefab, roadSpawnPoint + tier0PlatformTotalOffset, roadPrefab.transform.rotation);
+    //        tier0Queue.Enqueue(lastTileTier0);
+    //        lastTileTier0.GetComponent<SpriteRenderer>().sortingOrder = midSizePlatformSortingOrder;
+    //        tier0PlatformTotalOffset += midSizePlatformOffset;
+
+    //        smallSizePlatformSortingOrder++;
+    //        midSizePlatformSortingOrder++;
+    //    }
+
+    //    Destroy(loadingScreen);
+    //    StartCoroutine(MoveCamera());
+    //}
 
 
     int GetTierofOutOfBoundsTile()
@@ -444,7 +532,6 @@ public class MapGenerator : MonoBehaviour
         GameObject tempGameObject = null;
 
 
-        //CreateObstacles();
         if (TierNum == -4)
         {
             tempGameObject = tier_4Queue.Peek();
@@ -550,26 +637,6 @@ public class MapGenerator : MonoBehaviour
         }
 
     }
-
-
-    void CreateObstacles()
-    {
-        float cameraLength = Camera.main.orthographicSize + 2f;
-        Vector2 cameraPos = Camera.main.transform.position;
-        cameraPos.x += cameraLength;
-        cameraPos.y = 0.75f;
-        Instantiate<GameObject>(ObstaclesPrefab[0], cameraPos, ObstaclesPrefab[0].transform.rotation);
-    }
-
-    //void CreateTreeRandomly(int TierNum)
-    //{
-
-    //    int randomNum = UnityEngine.Random.Range(1, 10);
-    //    if (TreeSpawnProbablity < randomNum)
-    //    {
-
-    //    }
-    //}
 
 }
 

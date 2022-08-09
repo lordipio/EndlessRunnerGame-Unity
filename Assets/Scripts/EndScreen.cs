@@ -45,7 +45,7 @@ public class EndScreen : MonoBehaviour
         yield return new WaitForSeconds(endScreenDelay);
 
 
-        endScreenAnimator.SetBool("EnableEndScreen", true);
+        //endScreenAnimator.SetBool("EnableEndScreen", true);
     }
 
     void ReplayButtonClicked()
@@ -68,12 +68,5 @@ public class EndScreen : MonoBehaviour
     }
 
 
-    IEnumerator TEST()
-    {
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(0);
-        gameObject.SetActive(false);
-
-    }
 
 }
