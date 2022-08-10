@@ -5,6 +5,10 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     #region AudioClips
+    [Header("AudioClips:")]
+    [Space]
+    [Space]
+
     [SerializeField]
     List<AudioClip> jumpAudioClips;
     [SerializeField]
@@ -15,20 +19,28 @@ public class SoundManager : MonoBehaviour
     List<AudioClip> BackgroundMusicAudioClips;
     #endregion
 
+    #region AudioSources
+    [Header("AudioSources:")]
+    [Space]
+    [Space]
 
     AudioSource soundEffectAudioSource;
     AudioSource backgroundMusicAudioSource;
-
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
+        AssignInitialValues();
+        PlayBackgroundMusic();
+    }
 
+    void AssignInitialValues()
+    {
         soundEffectAudioSource = gameObject.AddComponent<AudioSource>();
         soundEffectAudioSource.volume = 0.2f;
-
         backgroundMusicAudioSource = gameObject.AddComponent<AudioSource>();
-        
+
         if (!soundEffectAudioSource)
         {
             throw new System.Exception("audioSource is not found!");
@@ -37,8 +49,6 @@ public class SoundManager : MonoBehaviour
         CharacterHandler.characterDiedEvent += CharacterDiedSound;
         CharacterHandler.characterJumpedEvent += CharacterJumpedSound;
         CharacterHandler.characterRunEvent += CharacterRunSound;
-        PlayBackgroundMusic();
-
     }
 
     void CharacterJumpedSound()
@@ -47,7 +57,6 @@ public class SoundManager : MonoBehaviour
         soundEffectAudioSource = RandomizePitch(soundEffectAudioSource);
         soundEffectAudioSource.Play();
         soundEffectAudioSource.loop = false;
-
     }
 
     void CharacterDiedSound()
@@ -61,6 +70,7 @@ public class SoundManager : MonoBehaviour
         CharacterHandler.characterJumpedEvent -= CharacterJumpedSound;
         CharacterHandler.characterRunEvent -= CharacterRunSound;
     }
+
     void CharacterRunSound()
     {
         soundEffectAudioSource.clip = runningAudioClips;
@@ -75,7 +85,6 @@ public class SoundManager : MonoBehaviour
         backgroundMusicAudioSource.clip = currentAudioClip;
         backgroundMusicAudioSource.Play();
         Invoke("PlayBackgroundMusic", currentAudioClip.length);
-            
     }
 
     AudioClip SelectRandomAudioClip(List<AudioClip> audioClipList)
@@ -88,7 +97,4 @@ public class SoundManager : MonoBehaviour
         audioSource.pitch = Random.Range(0.9f, 1.1f);
         return audioSource;
     }
-
-    
-
 }

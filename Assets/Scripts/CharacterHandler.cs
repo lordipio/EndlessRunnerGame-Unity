@@ -17,39 +17,50 @@ public class CharacterHandler : MonoBehaviour
 
     #endregion
 
-    bool isCharacterDead = false;
-
     #region Instances
     MapGenerator mapGenerator;
     CharacterSpawner characterSpawner;
     #endregion
 
-    #region Prefabs
-    GameObject characterPrefab;
-    #endregion
+    #region Character
+    [Header("Character:")]
+    [Space]
+    [Space]
 
     [SerializeField]
     Animator characterAnimator;
-
+    bool isCharacterDead = false;
+    Vector2 characterPosition;
     BoxCollider2D characterCollider;
+    GameObject characterPrefab;
+    float characterSpeed;
+    SpriteRenderer characterSpriteRenderer;
+    #endregion
+
+    #region Touches
+    [Header("Touches:")]
+    [Space]
+    [Space]
+
+    [SerializeField]
+    float dragLength;
     Vector2 touchFirstPos;
     Vector2 touchLastPos;
+    bool characterMovementTransitionIsOver = true;
+    #endregion
 
-
-    Vector2 characterPosition;
-    Vector2 slope;
+    #region MapInfo
+    [Header("MapInfo:")]
+    [Space]
+    [Space]
 
     [SerializeField]
     Vector2 roadLeftSide;
 
     [SerializeField]
     Vector2 roadRightSide;
-    float speed;
-
-    bool transitionIsOver = true;
-    [SerializeField]
-    float dragLength;
-
+    Vector2 slope;
+    #endregion
 
     #region SortingLayers
     string characterLeftSortingLayer = "CharacterLeft";
@@ -57,21 +68,15 @@ public class CharacterHandler : MonoBehaviour
     string deadCharacterSortingLayer = "DeadCharacter";
     #endregion
 
-    SpriteRenderer characterSpriteRenderer;
-
     void Awake()
     {
-        characterCollider = GetComponent<BoxCollider2D>();
-        characterSpriteRenderer = GetComponent<SpriteRenderer>();
-        characterSpriteRenderer.sortingLayerName = characterRightSortingLayer;
-
+        AssignValuesInAwake();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         characterRunEvent?.Invoke();
-        AssignValues();
+        AssignValuesInStart();
     }
 
     void Update()
@@ -79,14 +84,27 @@ public class CharacterHandler : MonoBehaviour
         MoveCharacterAloneXAxis();
         CharacterController();
 
+        if (IsCharacterCollided())
+            CharacterDied();
+    }
+
+    bool IsCharacterCollided()
+    {
         if (characterCollider.IsTouchingLayers() && !isCharacterDead)
         {
             isCharacterDead = true;
-            CharacterDied();
         }
+        return isCharacterDead;
     }
 
-    void AssignValues()
+    void AssignValuesInAwake()
+    {
+        characterCollider = GetComponent<BoxCollider2D>();
+        characterSpriteRenderer = GetComponent<SpriteRenderer>();
+        characterSpriteRenderer.sortingLayerName = characterRightSortingLayer;
+    }
+
+    void AssignValuesInStart()
     {
         if (!MapGenerator.Instance)
         {
@@ -101,21 +119,14 @@ public class CharacterHandler : MonoBehaviour
         characterSpawner = CharacterSpawner.Instance;
         characterPrefab = characterSpawner.Character;
 
-        //roadLeftSide = mapGenerator.leftSideRoad;
-        //roadRightSide = mapGenerator.rightSideRoad;
         slope = mapGenerator.MovementSlope;
-        speed = mapGenerator.cameraInitialSpeed;
+        characterSpeed = mapGenerator.cameraInitialSpeed;
     }
 
-    private void OnEnable()
-    {
-    }
-
-    // Update is called once per frame
     void MoveCharacterAloneXAxis()
     {
         characterPosition = characterPrefab.transform.position;
-        characterPosition.x += slope.x * Time.deltaTime * speed;
+        characterPosition.x += slope.x * Time.deltaTime * characterSpeed;
         characterPrefab.transform.position = characterPosition;
     }
 
@@ -140,10 +151,10 @@ public class CharacterHandler : MonoBehaviour
                 touchLastPos = Camera.main.ScreenToWorldPoint(touch.position);
             }
 
-            if (touchLastPos.y - touchFirstPos.y >= dragLength && transitionIsOver)
+            if (touchLastPos.y - touchFirstPos.y >= dragLength && characterMovementTransitionIsOver)
                 StartCoroutine(MoveLeft());
 
-            else if (touchLastPos.y - touchFirstPos.y <= -dragLength && transitionIsOver)
+            else if (touchLastPos.y - touchFirstPos.y <= -dragLength && characterMovementTransitionIsOver)
                 StartCoroutine(MoveRight());
 
             if (touch.tapCount == 2)
@@ -156,11 +167,11 @@ public class CharacterHandler : MonoBehaviour
 
     IEnumerator MoveLeft()
     {
-        transitionIsOver = false;
+        characterMovementTransitionIsOver = false;
         while (true)
         {
             yield return null;
-            characterPosition.y += Time.deltaTime * speed * 2.5f;
+            characterPosition.y += Time.deltaTime * characterSpeed * 2.5f;
             if (characterPosition.y >= roadLeftSide.y) // character is in leftside of road
             {
                 characterPosition.y = roadLeftSide.y;
@@ -171,17 +182,16 @@ public class CharacterHandler : MonoBehaviour
 
             characterPrefab.transform.position = new Vector2(characterPrefab.transform.position.x, characterPosition.y);
         }
-        transitionIsOver = true;
-        
+        characterMovementTransitionIsOver = true;
     }
 
     IEnumerator MoveRight()
     {
-        transitionIsOver = false;
+        characterMovementTransitionIsOver = false;
         while (true)
         {
             yield return null;
-            characterPosition.y -= Time.deltaTime * speed * 2.5f;
+            characterPosition.y -= Time.deltaTime * characterSpeed * 2.5f;
             if (characterPosition.y <= roadRightSide.y) // character is in rightside of road
             {
                 characterPosition.y = roadRightSide.y;
@@ -193,10 +203,8 @@ public class CharacterHandler : MonoBehaviour
 
             characterPrefab.transform.position = new Vector2(characterPrefab.transform.position.x, characterPosition.y);
         }
-        transitionIsOver = true;
+        characterMovementTransitionIsOver = true;
     }
-
-
 
     void Jump()
     {
@@ -205,23 +213,19 @@ public class CharacterHandler : MonoBehaviour
         characterCollider.enabled = false;
     }
 
-
     public void SetLandingTrue()
     {
         characterAnimator.SetBool("IsJumping", false);
         characterCollider.enabled = true;
         characterRunEvent?.Invoke();
-
     }
 
     void CharacterDied()
     {
         characterDiedEvent?.Invoke();
-
         characterAnimator.SetBool("IsDead", isCharacterDead);
-
         mapGenerator.cameraInitialSpeed = 0f;
-        speed = 0f;
+        characterSpeed = 0f;
         characterSpriteRenderer.sortingLayerName = deadCharacterSortingLayer;
     }
 

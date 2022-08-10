@@ -12,10 +12,11 @@ public class CharacterSpawner : MonoBehaviour
     }
     #endregion
 
-    #region Prefab
-    [Header("Prefabs:")]
+    #region Character
+    [Header("Character:")]
     [SerializeField]
     private GameObject characterPrefabInScene;
+    GameObject character;
     #endregion
 
     #region SpawnInfo
@@ -26,26 +27,23 @@ public class CharacterSpawner : MonoBehaviour
     Vector2 SpawnPoint;
     #endregion
 
-    GameObject character;
+    #region Property
     public GameObject Character
     {
         get { return character; }
     }
+    #endregion
 
     private void Awake()
     {
         CreateSingleton();
+        AssignInitialValues();
+    }
+
+    void AssignInitialValues()
+    {
         character = Instantiate<GameObject>(characterPrefabInScene, SpawnPoint, characterPrefabInScene.transform.rotation);
     }
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-
 
     void CreateSingleton()
     {

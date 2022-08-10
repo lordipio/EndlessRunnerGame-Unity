@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9123096646439545300}
   - component: {fileID: 5709186191340289293}
   - component: {fileID: -3670609593082899756}
+  - component: {fileID: -873391804746094156}
   m_Layer: 9
   m_Name: item_roadblock
   m_TagString: Tier0
@@ -112,3 +113,16 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &-873391804746094156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636506974719827579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9f0e17c56126814e9c74186faf51a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 5709186191340289293}

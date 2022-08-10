@@ -7,11 +7,11 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     #region Buttons
+    [Header("Buttons:")]
+    [Space]
+    [Space]
     [SerializeField]
     Button playButton;
-
-    [SerializeField]
-    Button selectCharacterButton;
 
     [SerializeField]
     Button exitButton;
@@ -19,6 +19,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     Button backButton;
 
+    [SerializeField]
+    Button selectCharacterButton;
+    #endregion
+
+    #region Pages
+    [Header("Pages:")]
+    [Space]
+    [Space]
     [SerializeField]
     GameObject workInProgressPage;
 
@@ -29,33 +37,25 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AssignInitialValues();
+    }
+
+    void PlayButtonClicked()
+    {
+        loadScreenPage = Instantiate<GameObject>(loadScreenPage);
+        loadScreenPage.SetActive(true);
+        RemoveAllListenerForAllButtons();
+        gameObject.SetActive(false);
+        SceneManager.LoadScene(1);
+    }
+
+    void AssignInitialValues()
+    {
         workInProgressPage.gameObject.SetActive(false);
         playButton.onClick.AddListener(PlayButtonClicked);
         selectCharacterButton.onClick.AddListener(SelectCharacterButtonClicked);
         backButton.onClick.AddListener(BackButton);
         exitButton.onClick.AddListener(ExitButton);
-    }
-
-
-    void PlayButtonClicked()
-    {
-        
-        Instantiate<GameObject>(loadScreenPage);
-        //gameObject.SetActive(false);
-        playButton.onClick.RemoveAllListeners();
-        selectCharacterButton.onClick.RemoveAllListeners();
-        exitButton.onClick.RemoveAllListeners();
-        gameObject.SetActive(false);
-        SceneManager.LoadScene(1);
-        //gameObject.SetActive(false);
-        //LoadScreen.loadscreen.LoadScene(1);
-        //StartCoroutine(TEST());
-    }
-
-    IEnumerator TEST()
-    {
-        yield return new WaitForSeconds(1f);
-
     }
 
     void SelectCharacterButtonClicked()
@@ -66,9 +66,7 @@ public class MainMenu : MonoBehaviour
 
     void ExitButton()
     {
-        playButton.onClick.RemoveAllListeners();
-        selectCharacterButton.onClick.RemoveAllListeners();
-        exitButton.onClick.RemoveAllListeners();
+        RemoveAllListenerForAllButtons();
         Application.Quit();
     }
 
@@ -76,5 +74,13 @@ public class MainMenu : MonoBehaviour
     {
         gameObject.SetActive(true);
         workInProgressPage.gameObject.SetActive(false);
+    }
+
+    void RemoveAllListenerForAllButtons()
+    {
+        playButton.onClick.RemoveAllListeners();
+        selectCharacterButton.onClick.RemoveAllListeners();
+        exitButton.onClick.RemoveAllListeners();
+        backButton.onClick.RemoveAllListeners();
     }
 }

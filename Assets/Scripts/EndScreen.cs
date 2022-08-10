@@ -6,67 +6,83 @@ using UnityEngine;
 
 public class EndScreen : MonoBehaviour
 {
-    [SerializeField]
-    float endScreenDelay;
-
+    #region Buttons
+    [Header("Buttons: ")]
+    [Space]
+    [Space]
+    
     [SerializeField]
     Button replayButton;
 
     [SerializeField]
     Button homeButton;
+    #endregion
+
+    #region EndScreen
+    [Header("EndScreen: ")]
+    [Space]
+    [Space]
+
+    [SerializeField]
+    float endScreenDelay;
 
     [SerializeField]
     Animator endScreenAnimator;
+    #endregion
 
+    #region LoadScreen
+    [Header("LoadScreen: ")]
+    [Space]
+    [Space]
     [SerializeField]
     GameObject loadScreenPage;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-
         gameObject.SetActive(false);
-        CharacterHandler.characterDiedEvent += EndScreenIsReady;
+        AssignInitialValues();
+    }
+    
+    void AssignInitialValues()
+    {
+        CharacterHandler.characterDiedEvent += ReadyUpEndScreen;
         replayButton.onClick.AddListener(ReplayButtonClicked);
         homeButton.onClick.AddListener(HomeButtonClicked);
     }
 
-
-
-    void EndScreenIsReady() 
+    void ReadyUpEndScreen() 
     {
         gameObject.SetActive(true);
         StartCoroutine(ShowEndScreen());
-        CharacterHandler.characterDiedEvent -= EndScreenIsReady;
+        CharacterHandler.characterDiedEvent -= ReadyUpEndScreen;
     }
 
     IEnumerator ShowEndScreen()
     {
         yield return new WaitForSeconds(endScreenDelay);
-
-
-        //endScreenAnimator.SetBool("EnableEndScreen", true);
     }
 
     void ReplayButtonClicked()
     {
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        replayButton.onClick.RemoveAllListeners();
-
+        RemoveAllListenerForAllButtons();
     }
 
     void HomeButtonClicked()
     {
         Vector2 CameraPos = Camera.main.transform.position;
-        Instantiate<GameObject>(loadScreenPage, new Vector3(CameraPos.x, CameraPos.y, 0f), Camera.main.transform.rotation);
+        loadScreenPage = Instantiate<GameObject>(loadScreenPage, new Vector3(CameraPos.x, CameraPos.y, 0f), Camera.main.transform.rotation);
+        loadScreenPage.SetActive(true);
         gameObject.SetActive(false);
-        replayButton.onClick.RemoveAllListeners();
-        homeButton.onClick.RemoveAllListeners();
-        //StartCoroutine(TEST());
+        RemoveAllListenerForAllButtons();
         SceneManager.LoadScene(0);
     }
-
-
-
+    
+    void RemoveAllListenerForAllButtons()
+    {
+        replayButton.onClick.RemoveAllListeners();
+        homeButton.onClick.RemoveAllListeners();
+    }
 }

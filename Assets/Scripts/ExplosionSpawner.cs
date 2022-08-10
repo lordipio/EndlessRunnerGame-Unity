@@ -5,25 +5,26 @@ using UnityEngine;
 
 public class ExplosionSpawner : MonoBehaviour
 {
-
-
+    #region Character
     CharacterSpawner characterSpawner;
     GameObject character;
+    #endregion
 
-
+    #region Explosion
+    [Header("Explosion:")]
+    [Space]
+    [Space]
     [SerializeField]
     GameObject explosionPrefab;
-
-
-
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        AssignValues();
+        AssignInitialValues();
     }
 
-    void AssignValues()
+    void AssignInitialValues()
     {
         if (!CharacterSpawner.Instance)
             throw new Exception("CharacterSpawner Instance is not found!");
@@ -37,7 +38,6 @@ public class ExplosionSpawner : MonoBehaviour
         CharacterHandler.characterDiedEvent += Explode;
     }
 
-
     public void Explode()
     {
         if (!explosionPrefab)
@@ -46,8 +46,5 @@ public class ExplosionSpawner : MonoBehaviour
             print("character is not found!");
         Instantiate<GameObject>(explosionPrefab, character.transform.position, explosionPrefab.transform.rotation);
         CharacterHandler.characterDiedEvent -= Explode;
-
     }
-
-
 }
