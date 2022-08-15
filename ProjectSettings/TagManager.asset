@@ -4,17 +4,17 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Star
   - Tier-2
+  - tier-3
+  - Tier1
+  - tier-4
+  - Tier2
   - Tier-1
   - Tier0
-  - Tier1
-  - Tier2
-  - Tier3
-  - BigSizePlatform
-  - SmallSizePlatform
-  - MidSizePlatform
-  - tier-3
-  - tier-4
+  - Gem
+  - GoldenCoin
+  - SilverCoin
   layers:
   - Default
   - TransparentFX

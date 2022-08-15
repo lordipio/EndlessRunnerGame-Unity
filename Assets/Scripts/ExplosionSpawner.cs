@@ -35,7 +35,7 @@ public class ExplosionSpawner : MonoBehaviour
         if (!character)
             throw new Exception("Character is not found!");
 
-        CharacterHandler.characterDiedEvent += Explode;
+        GameManager.characterDiedEvent += Explode;
     }
 
     public void Explode()
@@ -45,6 +45,6 @@ public class ExplosionSpawner : MonoBehaviour
         if (!character)
             print("character is not found!");
         Instantiate<GameObject>(explosionPrefab, character.transform.position, explosionPrefab.transform.rotation);
-        CharacterHandler.characterDiedEvent -= Explode;
+        GameManager.characterDiedEvent -= Explode;
     }
 }

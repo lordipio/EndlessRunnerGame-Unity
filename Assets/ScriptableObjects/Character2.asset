@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6492f1e2b9e54f448b00dcc75888e198, type: 3}
+  m_Name: Character2
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 691596636306344765, guid: 11c59559f7d70694999426d180c20e24, type: 3}
+  animator: {fileID: 765197313938354507, guid: 11c59559f7d70694999426d180c20e24, type: 3}
+  rigidbody: {fileID: -7974729894921895515, guid: 11c59559f7d70694999426d180c20e24, type: 3}
+  boxCollider: {fileID: 2781180171907355070, guid: 11c59559f7d70694999426d180c20e24, type: 3}
+  characterHandler: {fileID: 3202004619078524440, guid: 11c59559f7d70694999426d180c20e24, type: 3}
+  CharacterIdlePose: {fileID: 1509690687825009327, guid: 7a150b5f1aff6084ea882329fe86177c, type: 3}
+  price: 100
+  isUnlocked: 0

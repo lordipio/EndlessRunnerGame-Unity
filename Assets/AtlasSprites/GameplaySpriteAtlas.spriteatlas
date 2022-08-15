@@ -65,6 +65,9 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 760d313ce76c53345bc216dacdc28110, type: 3}
     - {fileID: 2800000, guid: 04699449abdbb7342a15bf2eb4032de0, type: 3}
     - {fileID: 2800000, guid: b48a95c8c9759094391210f86a8d4656, type: 3}
+    - {fileID: 2800000, guid: e4bad0bec9b97504aaacf79dd8613e0e, type: 3}
+    - {fileID: 2800000, guid: 1998b4e96ceba1d4fa2d41a677602932, type: 3}
+    - {fileID: 2800000, guid: 35206ab8b1da29e428435527af291459, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -101,14 +104,33 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1bf37237e7668154c9cd5ed39d636f9c, type: 3}
   - {fileID: 21300000, guid: 92a3be8789525344ab6e480239b9030c, type: 3}
   - {fileID: 21300000, guid: 3c7933087531ca84db7fd9ba5045f1fc, type: 3}
+  - {fileID: -2890370699262637217, guid: 35206ab8b1da29e428435527af291459, type: 3}
+  - {fileID: -4080278737599844964, guid: 35206ab8b1da29e428435527af291459, type: 3}
+  - {fileID: 5640320162214436903, guid: 35206ab8b1da29e428435527af291459, type: 3}
+  - {fileID: 4851056643655978520, guid: 35206ab8b1da29e428435527af291459, type: 3}
   - {fileID: 21300000, guid: b48a95c8c9759094391210f86a8d4656, type: 3}
   - {fileID: 21300000, guid: 0a529e196c69331429b9baea3aabb954, type: 3}
   - {fileID: 21300000, guid: 04699449abdbb7342a15bf2eb4032de0, type: 3}
+  - {fileID: -2662169338165303921, guid: 1998b4e96ceba1d4fa2d41a677602932, type: 3}
+  - {fileID: 4383389458023778659, guid: 1998b4e96ceba1d4fa2d41a677602932, type: 3}
+  - {fileID: 130084099174672254, guid: 1998b4e96ceba1d4fa2d41a677602932, type: 3}
+  - {fileID: -4976079567497121232, guid: 1998b4e96ceba1d4fa2d41a677602932, type: 3}
+  - {fileID: 9117548841064295767, guid: 1998b4e96ceba1d4fa2d41a677602932, type: 3}
   - {fileID: 21300000, guid: 808a15f97b370bf438ea63a8e52e27dc, type: 3}
   - {fileID: 21300000, guid: f212af2a139205649a66d0e8e28bcb2f, type: 3}
   - {fileID: 21300000, guid: 9903124ab6ba22f4c8d58f192853a53f, type: 3}
   - {fileID: 21300000, guid: 33e6daca36c147547b04cde32f7f0314, type: 3}
   - {fileID: 21300000, guid: 709d43bb4ab1032409596a37eb8cd684, type: 3}
+  - {fileID: -7487436801176157817, guid: 7319a0cb84482e64c9c6d8ea56e48baf, type: 3}
+  - {fileID: -6943447523856610506, guid: 7319a0cb84482e64c9c6d8ea56e48baf, type: 3}
+  - {fileID: 4588736447598766473, guid: 7319a0cb84482e64c9c6d8ea56e48baf, type: 3}
+  - {fileID: 8706567805487113664, guid: 7319a0cb84482e64c9c6d8ea56e48baf, type: 3}
+  - {fileID: 3522011133049882637, guid: 7319a0cb84482e64c9c6d8ea56e48baf, type: 3}
+  - {fileID: 3204480812468917802, guid: 7319a0cb84482e64c9c6d8ea56e48baf, type: 3}
+  - {fileID: -970496918810939563, guid: 7319a0cb84482e64c9c6d8ea56e48baf, type: 3}
+  - {fileID: -2907624155043114565, guid: 7319a0cb84482e64c9c6d8ea56e48baf, type: 3}
+  - {fileID: 6042557600975065454, guid: 7319a0cb84482e64c9c6d8ea56e48baf, type: 3}
+  - {fileID: -436730644578740556, guid: 7319a0cb84482e64c9c6d8ea56e48baf, type: 3}
   - {fileID: 21300000, guid: 760d313ce76c53345bc216dacdc28110, type: 3}
   - {fileID: 21300000, guid: 53b71e8cf69a9b345b2db42449ca8bc2, type: 3}
   - {fileID: 21300000, guid: 14d67abc5c736294fa276ca52e546513, type: 3}
@@ -133,6 +155,11 @@ SpriteAtlas:
   - {fileID: -3916514138589664008, guid: 8dd1859e0df2f7e4d977b781ffb69f19, type: 3}
   - {fileID: 4717485204334195319, guid: 8dd1859e0df2f7e4d977b781ffb69f19, type: 3}
   - {fileID: -8804724334827305186, guid: 8dd1859e0df2f7e4d977b781ffb69f19, type: 3}
+  - {fileID: -4177248460966334796, guid: e4bad0bec9b97504aaacf79dd8613e0e, type: 3}
+  - {fileID: -8427545570610324718, guid: e4bad0bec9b97504aaacf79dd8613e0e, type: 3}
+  - {fileID: 1486534941499973156, guid: e4bad0bec9b97504aaacf79dd8613e0e, type: 3}
+  - {fileID: -4410081366628917244, guid: e4bad0bec9b97504aaacf79dd8613e0e, type: 3}
+  - {fileID: 7672292905884172350, guid: e4bad0bec9b97504aaacf79dd8613e0e, type: 3}
   - {fileID: 21300000, guid: a03ef21ffce3d6144aac6aad5f5cbaea, type: 3}
   m_PackedSpriteNamesToIndex:
   - isometric_block (14)
@@ -166,14 +193,33 @@ SpriteAtlas:
   - item_box
   - item_spike3
   - item_car2
+  - Gem_1
+  - Gem_0
+  - Gem_3
+  - Gem_2
   - road
   - item_car1
   - item_tnt
+  - SilverCoin_4
+  - SilverCoin_2
+  - SilverCoin_3
+  - SilverCoin_0
+  - SilverCoin_1
   - isometric_block (12)
   - item_spike2
   - isometric_block (4)
   - item_cart
   - isometric_block (8)
+  - _Idle_5
+  - _Idle_4
+  - _Idle_7
+  - _Idle_6
+  - _Idle_1
+  - _Idle_0
+  - _Idle_3
+  - _Idle_2
+  - _Idle_9
+  - _Idle_8
   - item_spike4
   - isometric_block (9)
   - isometric_block (7)
@@ -198,6 +244,11 @@ SpriteAtlas:
   - _Run_5
   - _Run_6
   - _Run_7
+  - GoldenCoin_2
+  - GoldenCoin_3
+  - GoldenCoin_0
+  - GoldenCoin_1
+  - GoldenCoin_4
   - item_car
   m_RenderDataMap: {}
   m_Tag: GameplaySpriteAtlas

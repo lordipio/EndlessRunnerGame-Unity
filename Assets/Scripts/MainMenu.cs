@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
 using UnityEngine;
 
 public class MainMenu : MonoBehaviour
@@ -16,8 +17,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     Button exitButton;
 
-    [SerializeField]
-    Button backButton;
+
 
     [SerializeField]
     Button selectCharacterButton;
@@ -31,6 +31,7 @@ public class MainMenu : MonoBehaviour
     GameObject workInProgressPage;
 
     [SerializeField]
+    GameObject loadScreenPagePrefab;
     GameObject loadScreenPage;
     #endregion
 
@@ -40,26 +41,38 @@ public class MainMenu : MonoBehaviour
         AssignInitialValues();
     }
 
-    void PlayButtonClicked()
+    private void Awake()
     {
-        loadScreenPage = Instantiate<GameObject>(loadScreenPage);
-        loadScreenPage.SetActive(true);
-        RemoveAllListenerForAllButtons();
-        gameObject.SetActive(false);
-        SceneManager.LoadScene(1);
+
     }
 
     void AssignInitialValues()
     {
+        if (!SaveAndLoadSystem.DoesTotalCoinsDataExist())
+            SaveAndLoadSystem.SaveTotalCoins(0);
+        if (!SaveAndLoadSystem.DoesSelectedCharacterDataExist())
+            SaveAndLoadSystem.SaveSelectedCharacter(1);
+
+        loadScreenPage = Instantiate<GameObject>(loadScreenPagePrefab);
+        loadScreenPage.SetActive(false);
         workInProgressPage.gameObject.SetActive(false);
         playButton.onClick.AddListener(PlayButtonClicked);
         selectCharacterButton.onClick.AddListener(SelectCharacterButtonClicked);
-        backButton.onClick.AddListener(BackButton);
         exitButton.onClick.AddListener(ExitButton);
     }
 
+    void PlayButtonClicked()
+    {
+        RemoveAllListenerForAllButtons();
+        loadScreenPage.SetActive(true);
+        gameObject.SetActive(false);
+        SceneManager.LoadScene(1);
+    }
+
+
     void SelectCharacterButtonClicked()
     {
+        //print("Checked");
         workInProgressPage.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }
@@ -81,6 +94,5 @@ public class MainMenu : MonoBehaviour
         playButton.onClick.RemoveAllListeners();
         selectCharacterButton.onClick.RemoveAllListeners();
         exitButton.onClick.RemoveAllListeners();
-        backButton.onClick.RemoveAllListeners();
     }
 }

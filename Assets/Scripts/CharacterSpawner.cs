@@ -15,8 +15,9 @@ public class CharacterSpawner : MonoBehaviour
     #region Character
     [Header("Character:")]
     [SerializeField]
-    private GameObject characterPrefabInScene;
+    GameObject[] allCharacters;
     GameObject character;
+
     #endregion
 
     #region SpawnInfo
@@ -24,7 +25,7 @@ public class CharacterSpawner : MonoBehaviour
     [Space]
     [Space]
     [SerializeField]
-    Vector2 SpawnPoint;
+    Vector2 spawnPoint;
     #endregion
 
     #region Property
@@ -37,15 +38,16 @@ public class CharacterSpawner : MonoBehaviour
     private void Awake()
     {
         CreateSingleton();
-        AssignInitialValues();
+        Spawn();
     }
 
-    void AssignInitialValues()
+    void Spawn()
     {
-        character = Instantiate<GameObject>(characterPrefabInScene, SpawnPoint, characterPrefabInScene.transform.rotation);
+        int selectedCharacterNumber = SaveAndLoadSystem.LoadSelectedCharacter().SelectedCharacter - 1;
+        character = Instantiate<GameObject>(allCharacters[selectedCharacterNumber], spawnPoint, allCharacters[selectedCharacterNumber].transform.rotation);
     }
 
-    void CreateSingleton()
+      void CreateSingleton()
     {
         if (instance && instance != this)
         {

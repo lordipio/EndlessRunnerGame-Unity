@@ -24,9 +24,6 @@ public class EndScreen : MonoBehaviour
     [Space]
 
     [SerializeField]
-    float endScreenDelay;
-
-    [SerializeField]
     Animator endScreenAnimator;
     #endregion
 
@@ -35,6 +32,7 @@ public class EndScreen : MonoBehaviour
     [Space]
     [Space]
     [SerializeField]
+    GameObject loadScreenPagePrefab;
     GameObject loadScreenPage;
     #endregion
 
@@ -47,22 +45,21 @@ public class EndScreen : MonoBehaviour
     
     void AssignInitialValues()
     {
-        CharacterHandler.characterDiedEvent += ReadyUpEndScreen;
+        GameManager.characterDiedEvent += ReadyUpEndScreen;
         replayButton.onClick.AddListener(ReplayButtonClicked);
         homeButton.onClick.AddListener(HomeButtonClicked);
     }
 
     void ReadyUpEndScreen() 
     {
+        Vector2 CameraPos = Camera.main.transform.position;
+        loadScreenPage = Instantiate<GameObject>(loadScreenPagePrefab, new Vector3(CameraPos.x, CameraPos.y, 0f), Camera.main.transform.rotation);
+        loadScreenPage.SetActive(false);
         gameObject.SetActive(true);
-        StartCoroutine(ShowEndScreen());
-        CharacterHandler.characterDiedEvent -= ReadyUpEndScreen;
+        GameManager.characterDiedEvent -= ReadyUpEndScreen;
     }
 
-    IEnumerator ShowEndScreen()
-    {
-        yield return new WaitForSeconds(endScreenDelay);
-    }
+
 
     void ReplayButtonClicked()
     {
@@ -72,8 +69,6 @@ public class EndScreen : MonoBehaviour
 
     void HomeButtonClicked()
     {
-        Vector2 CameraPos = Camera.main.transform.position;
-        loadScreenPage = Instantiate<GameObject>(loadScreenPage, new Vector3(CameraPos.x, CameraPos.y, 0f), Camera.main.transform.rotation);
         loadScreenPage.SetActive(true);
         gameObject.SetActive(false);
         RemoveAllListenerForAllButtons();

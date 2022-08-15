@@ -17,6 +17,8 @@ public class SoundManager : MonoBehaviour
     AudioClip runningAudioClips;
     [SerializeField]
     List<AudioClip> BackgroundMusicAudioClips;
+    [SerializeField]
+    AudioClip sparkleAudioClip;
     #endregion
 
     #region AudioSources
@@ -46,9 +48,11 @@ public class SoundManager : MonoBehaviour
             throw new System.Exception("audioSource is not found!");
         }
 
-        CharacterHandler.characterDiedEvent += CharacterDiedSound;
+        GameManager.characterDiedEvent += CharacterDiedSound;
         CharacterHandler.characterJumpedEvent += CharacterJumpedSound;
         CharacterHandler.characterRunEvent += CharacterRunSound;
+        CoinAndGemHandler.grabedCoinsEvent += PlaySparkleSound;
+
     }
 
     void CharacterJumpedSound()
@@ -66,9 +70,10 @@ public class SoundManager : MonoBehaviour
         soundEffectAudioSource.Play();
         soundEffectAudioSource.loop = false;
 
-        CharacterHandler.characterDiedEvent -= CharacterDiedSound;
+        GameManager.characterDiedEvent -= CharacterDiedSound;
         CharacterHandler.characterJumpedEvent -= CharacterJumpedSound;
         CharacterHandler.characterRunEvent -= CharacterRunSound;
+        CoinAndGemHandler.grabedCoinsEvent -= PlaySparkleSound;
     }
 
     void CharacterRunSound()
@@ -87,6 +92,14 @@ public class SoundManager : MonoBehaviour
         Invoke("PlayBackgroundMusic", currentAudioClip.length);
     }
 
+    void PlaySparkleSound()
+    {
+        soundEffectAudioSource.clip = sparkleAudioClip;
+        RandomizePitch(soundEffectAudioSource);
+        soundEffectAudioSource.Play();
+        soundEffectAudioSource.loop = false;
+    }
+
     AudioClip SelectRandomAudioClip(List<AudioClip> audioClipList)
     {
         return audioClipList[Random.Range(0, audioClipList.Count)];
@@ -97,4 +110,6 @@ public class SoundManager : MonoBehaviour
         audioSource.pitch = Random.Range(0.9f, 1.1f);
         return audioSource;
     }
+
+    
 }

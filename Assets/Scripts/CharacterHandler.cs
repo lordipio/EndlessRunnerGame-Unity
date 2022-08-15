@@ -6,8 +6,6 @@ using UnityEngine;
 public class CharacterHandler : MonoBehaviour
 {
     #region Delegations And Events
-    public delegate void CharacterDiedDelegate();
-    public static event CharacterDiedDelegate characterDiedEvent;
 
     public delegate void CharacterJumpedDelegate();
     public static event CharacterJumpedDelegate characterJumpedEvent;
@@ -20,6 +18,7 @@ public class CharacterHandler : MonoBehaviour
     #region Instances
     MapGenerator mapGenerator;
     CharacterSpawner characterSpawner;
+    GameManager gameManager;
     #endregion
 
     #region Character
@@ -76,6 +75,7 @@ public class CharacterHandler : MonoBehaviour
     void Start()
     {
         characterRunEvent?.Invoke();
+
         AssignValuesInStart();
     }
 
@@ -84,18 +84,10 @@ public class CharacterHandler : MonoBehaviour
         MoveCharacterAloneXAxis();
         CharacterController();
 
-        if (IsCharacterCollided())
-            CharacterDied();
+        //if (IsCharacterCollided())
+        //    CharacterDied();
     }
 
-    bool IsCharacterCollided()
-    {
-        if (characterCollider.IsTouchingLayers() && !isCharacterDead)
-        {
-            isCharacterDead = true;
-        }
-        return isCharacterDead;
-    }
 
     void AssignValuesInAwake()
     {
@@ -116,18 +108,55 @@ public class CharacterHandler : MonoBehaviour
         {
             throw new Exception("CharacterSpawner Instance is not found!");
         }
+
         characterSpawner = CharacterSpawner.Instance;
+
         characterPrefab = characterSpawner.Character;
+        //if (!GameManager.Instance)
+        //{
+        //    throw new Exception("gameManager is not found!");
+        //}
+        //gameManager = GameManager.Instance;
+        GameManager.characterDiedEvent += CharacterDied;
 
         slope = mapGenerator.MovementSlope;
         characterSpeed = mapGenerator.cameraInitialSpeed;
     }
 
+    bool IsCharacterCollided()
+    {
+        //if (resultsColliders.Count != 0)
+
+        if (characterCollider.IsTouchingLayers() && !isCharacterDead)
+        {
+            List<Collider2D> resultsColliders = new List<Collider2D>();
+            ContactFilter2D contactFilter = new ContactFilter2D();
+            characterCollider.OverlapCollider(contactFilter, resultsColliders);
+            string colliderTag = resultsColliders[0].tag;
+
+            if (colliderTag == "Gem" || colliderTag == "SilverCoin" || colliderTag == "GoldenCoin")
+            {
+
+                return false;
+            }
+            isCharacterDead = true;
+        }
+        return isCharacterDead;
+    }
+
     void MoveCharacterAloneXAxis()
     {
+        
         characterPosition = characterPrefab.transform.position;
         characterPosition.x += slope.x * Time.deltaTime * characterSpeed;
         characterPrefab.transform.position = characterPosition;
+        if (Input.GetKeyDown(KeyCode.Space))
+            Jump();
+        if (Input.GetKeyDown(KeyCode.Q))
+            StartCoroutine(MoveLeft());
+        if (Input.GetKeyDown(KeyCode.E))
+            StartCoroutine(MoveRight());
+
     }
 
     void CharacterController()
@@ -220,13 +249,11 @@ public class CharacterHandler : MonoBehaviour
         characterRunEvent?.Invoke();
     }
 
+
     void CharacterDied()
     {
-        characterDiedEvent?.Invoke();
-        characterAnimator.SetBool("IsDead", isCharacterDead);
-        mapGenerator.cameraInitialSpeed = 0f;
         characterSpeed = 0f;
         characterSpriteRenderer.sortingLayerName = deadCharacterSortingLayer;
+        GameManager.characterDiedEvent -= CharacterDied;
     }
-
 }
