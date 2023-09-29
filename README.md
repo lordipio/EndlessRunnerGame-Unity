@@ -8,4 +8,4 @@
 ![image](https://github.com/lordipio/EndlessRunnerGame-Unity/assets/88454144/b9331ea1-64f8-415e-bac6-6d83087aea0d)
 
 ### Video
-[(Watch Video From Youtube!)](https://www.youtube.com/watch?v=IW4b_KQXx9s)
+[Watch Video From Youtube!](https://www.youtube.com/watch?v=IW4b_KQXx9s)
